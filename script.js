@@ -75,7 +75,7 @@ function refresh(){
   $points.html("Points: " + currentPoints);
   //num question
   var $numQues = $("#numQues");
-  $numQues.html("Question: " + numQues + " / " + totalQues);
+  $numQues.html("Question Answered: " + numQues + " / " + totalQues);
   //question
   var $question = $("#question");
   $question.html(UI[currentQuestion]["question"]);
