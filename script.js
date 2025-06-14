@@ -14,13 +14,13 @@ let UI = [
   {
     numQues: 3,
     question: "What will typeof null return in JavaScript?",
-    options: ["\"null\"", "\"object\"", "\"undefined\"", "\"boolean\""],
+    options: ['"null"', '"object"', '"undefined"', '"boolean"'],
     answer: 2,
   },
   {
     numQues: 4,
-    question: "What is the result of 2 + \"2\" in JavaScript?",
-    options: ["4", "\"22\"", "NaN", "undefined"],
+    question: 'What is the result of 2 + "2" in JavaScript?',
+    options: ["4", '"22"', "NaN", "undefined"],
     answer: 2,
   },
   {
@@ -54,7 +54,7 @@ let UI = [
       "Modifies the original array",
       "Filters elements based on a condition",
       "Creates a new array with results of a function on every element",
-      "Joins array elements into a string"
+      "Joins array elements into a string",
     ],
     answer: 3,
   },
@@ -62,57 +62,72 @@ let UI = [
     numQues: 10,
     question: "How do you check if a variable x is an array?",
     options: [
-      "x.type === \"array\"",
+      'x.type === "array"',
       "x instanceof Array",
-      "typeof x === \"array\"",
-      "isArray(x)"
+      'typeof x === "array"',
+      "isArray(x)",
     ],
     answer: 2,
-  }
+  },
 ];
 
 let currentQuestion = 0;
 let currentPoints = 0;
 let totalQues = UI.length;
 
-$(document).ready(function() {
+$(document).ready(function () {
   refresh();
 });
 
-function refresh(){
+function refresh() {
   $(".next").hide();
+  $(".history").css("border", "0px");
+  $(".question").show();
+  $(".sum").hide();
   $(".options-grid").show();
   //points
   var $points = $("#points");
   $points.html("Points: " + currentPoints);
   //num question
   var $numQues = $("#numQues");
-  $numQues.html("Current Question: " + UI[currentQuestion]["numQues"] + " / " + totalQues);
+  $numQues.html(
+    "Current Question: " + UI[currentQuestion]["numQues"] + " / " + totalQues
+  );
   //question
   var $question = $(".question");
   $question.html(UI[currentQuestion]["question"]);
-  $(".option").each(function(index){
+  $(".option").each(function (index) {
     $(this).html(UI[currentQuestion]["options"][index]);
   });
 }
 
 function answer(i) {
+  UI[currentQuestion]["selectedAnswer"] = i;
   if (i == UI[currentQuestion]["answer"]) {
     correct();
+    UI[currentQuestion]["isCorrect"] = true;
   } else {
     wrong();
+    UI[currentQuestion]["isCorrect"] = false;
   }
 }
 
 function wrong() {
   $(".options-grid").hide();
-  $(".question").html("Wrong ! Answer is " + UI[currentQuestion]["options"][UI[currentQuestion]["answer"]-1]);
+  $(".question").hide();
+  $(".sum").show();
+  $(".sum").html(
+    "Wrong ! Answer is " +
+      UI[currentQuestion]["options"][UI[currentQuestion]["answer"] - 1]
+  );
   $(".next").show();
 }
 
 function correct() {
   $(".options-grid").hide();
-  $(".question").html("Correct !");
+  $(".question").hide();
+  $(".sum").show();
+  $(".sum").html("Correct !");
   currentPoints++;
   $(".next").show();
 }
@@ -127,7 +142,17 @@ function nextQuestion() {
 }
 
 function finished() {
-  $(".options-grid").hide();
+  $(".quiz-container").hide();
+  $("#points").hide();
+  $("#numQues").hide();
   $(".next").hide();
-  $(".question").html("You get " + currentPoints + " points for this Quiz");
+  $(".sum").html("You get " + currentPoints + " points for this Quiz");
+  history();
+}
+
+function history() {
+  $(".quiz-container").show();
+  $(".history").css("border", "2px solid black");
+  var history = UI[currentQuestion]["question"];
+  $(".history").text(history);
 }

@@ -1,4 +1,4 @@
- body {
+body {
   background-color: #0b0c58;
   height: 100vh;
 }
@@ -31,15 +31,40 @@ button {
   border: 2px solid darkblue;
   width: 200px;
   cursor: pointer;
-  margin: 10px;
 }
 
 button:hover {
   background-color: #5b0c58;
 }
 
-#points, #numQues {
+#points,
+#numQues {
   color: white;
   font-size: 50px;
   margin-left: 200px;
+}
+
+.sum {
+  display: grid;
+  flex-wrap: wrap;
+  align-content: center;
+  font-size: 50px;
+  margin: auto;
+  border-radius: 10px;
+  width: 650px;
+  text-align: center;
+  color: white;
+}
+
+.history {
+  display: grid;
+  flex-wrap: wrap;
+  align-content: center;
+  font-size: 50px;
+  margin: auto;
+  border-radius: 10px;
+  height: 60vh;
+  width: 700px;
+  text-align: center;
+  color: white;
 }
