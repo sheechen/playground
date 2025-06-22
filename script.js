@@ -73,7 +73,7 @@ let UI = [
 
 let currentQuestion = 0;
 let currentPoints = 0;
-let totalQues = UI.length;
+let totalQues = 2;
 
 $(document).ready(function () {
   refresh();
@@ -81,7 +81,7 @@ $(document).ready(function () {
 
 function refresh() {
   $(".next").hide();
-  $(".history").css("border", "0px");
+  $(".history-container").hide();
   $(".question").show();
   $(".sum").hide();
   $(".options-grid").show();
@@ -151,8 +151,18 @@ function finished() {
 }
 
 function history() {
+  $(".history-container").show();
   $(".quiz-container").show();
+  $("#history").html("HISTORY");
   $(".history").css("border", "2px solid black");
-  var history = UI[currentQuestion]["question"];
-  $(".history").text(history);
+
+  for (let i = 0; i < UI.length; i++) {
+    let qText = `<p><strong>Q${UI[i].numQues}:</strong> ${UI[i].question}</p>`;
+    let userAnswer = UI[i].options[UI[i].selectedAnswer - 1] || "Not answered";
+    let correctAnswer = UI[i].options[UI[i].answer - 1];
+
+    let answerInfo = `<p>Your answer: ${userAnswer}<br>Correct answer: ${correctAnswer}</p>`;
+
+    $(".history").append(`<div>${qText}${answerInfo}</div><hr>`);
+  }
 }
