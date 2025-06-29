@@ -73,7 +73,7 @@ let UI = [
 
 let currentQuestion = 0;
 let currentPoints = 0;
-let totalQues = UI.length;
+let totalQues = 2;
 
 $(document).ready(function () {
   refresh();
@@ -164,5 +164,6 @@ function history() {
     $(".his").append(`<div>${qText}${answerInfo}</div><hr>`);
   }
 }
+
 
 
