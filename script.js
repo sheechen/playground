@@ -73,7 +73,7 @@ let UI = [
 
 let currentQuestion = 0;
 let currentPoints = 0;
-let totalQues = UI.length;
+let totalQues = 2;
 
 $(document).ready(function () {
   refresh();
@@ -146,15 +146,13 @@ function finished() {
   $("#points").hide();
   $("#numQues").hide();
   $(".next").hide();
-  $(".sum").html("You get " + currentPoints + " points for this Quiz");
+  $(".summary").html("You get " + currentPoints + " points for this Quiz");
   history();
 }
 
 function history() {
-  $(".history-container").show();
-  $(".quiz-container").show();
-  $("#history").html("HISTORY");
-  $(".history").css("border", "2px solid black");
+  $(".history").html("HISTORY");
+  $(".his").css("border", "2px solid white");
 
   for (let i = 0; i < UI.length; i++) {
     let qText = `<p><strong>Q${UI[i].numQues}:</strong> ${UI[i].question}</p>`;
@@ -163,6 +161,8 @@ function history() {
 
     let answerInfo = `<p>Your answer: ${userAnswer}<br>Correct answer: ${correctAnswer}</p>`;
 
-    $(".history").append(`<div>${qText}${answerInfo}</div><hr>`);
+    $(".his").append(`<div>${qText}${answerInfo}</div><hr>`);
   }
 }
+
+
