@@ -14,7 +14,6 @@ body {
   height: 60vh;
   width: 650px;
   text-align: center;
-  color: white;
 }
 
 .options-grid {
@@ -25,8 +24,8 @@ body {
 
 button {
   background-color: darkblue;
-  color: white;
   padding: 20px;
+  color: white;
   font-size: 18px;
   border-radius: 8px;
   border: 2px solid darkblue;
@@ -55,5 +54,9 @@ button:hover {
   border-radius: 10px;
   width: 650px;
   text-align: center;
+}
+
+.his {
   color: white;
+  background-color: black;
 }
