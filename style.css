@@ -4,8 +4,7 @@ body {
   height: 100vh;
 }
 
-.quiz-container,
-.history-container {
+.quiz-container {
   display: grid;
   flex-wrap: wrap;
   align-content: center;
@@ -18,8 +17,7 @@ body {
   color: white;
 }
 
-.options-grid,
-.his-option-grid {
+.options-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
