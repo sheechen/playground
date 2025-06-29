@@ -73,7 +73,7 @@ let UI = [
 
 let currentQuestion = 0;
 let currentPoints = 0;
-let totalQues = 2;
+let totalQues = UI.length;
 
 $(document).ready(function () {
   refresh();
