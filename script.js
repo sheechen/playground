@@ -1,111 +1,134 @@
-import { UI } from "./questions.js";
+import { UI } from "./list_question.js";
 
 let currentQuestion = 0;
 let currentPoints = 0;
-let totalQues = 10;
+const totalQues = 10;
 
-// question array
-let question = [];
-let copy = UI.slice();
+let questions = [];
+let copy = [...UI];
 
+// Randomly pick 10 questions
 for (let i = 0; i < totalQues; i++) {
-  let randomIndex = Math.floor(Math.random() * copy.length);
-  question.push(copy[randomIndex]);
-  copy.splice(randomIndex, 1);
+  const randomIndex = Math.floor(Math.random() * copy.length);
+  const q = copy.splice(randomIndex, 1)[0];
+  q.numQues = i + 1; // Assign question number
+  questions.push(q);
 }
 
-$(document).ready(function () {
-  refresh();
+$(document).ready(() => {
+  loadQuestion();
+
+  // Handle option click
+  $(".option").click(function () {
+    const optionIndex = parseInt($(this).data("option"));
+    handleAnswer(optionIndex);
+  });
+
+  // Handle NEXT button
+  $(".next").click(() => {
+    nextQuestion();
+  });
 });
 
-function refresh() {
-  $(".next").hide();
-  $(".history-container").hide();
-  $(".question").show();
-  $(".sum").hide();
-  $(".options-grid").show();
-  //points
-  var $points = $("#points");
-  $points.html("Points: " + currentPoints);
-  //num question
-  var numQues = 0;
-  numQues++;
-  var $numQues = $("#numQues");
-  $numQues.html("Current Question: " + numQues + " / " + totalQues);
-  //question
-  var $question = $(".question");
-  $question.html(question[currentQuestion]["question"]);
-  $(".option").each(function (index) {
-    $(this).html(question[currentQuestion]["options"][index]);
+function loadQuestion() {
+  $(".his, .history, .sum, .next").hide();
+  $(".options-grid, .question").show();
+
+  // Update header info
+  $("#points").html(`Points: ${currentPoints}`);
+  $("#numQues").html(`Current Question: ${currentQuestion + 1} / ${totalQues}`);
+
+  const q = questions[currentQuestion];
+  $(".question").html(q.question);
+
+  $(".option").each((index, button) => {
+    $(button).html(q.options[index]);
   });
 }
 
-function answer(i) {
-  question[currentQuestion]["selectedAnswer"] = i;
-  if (i == question[currentQuestion]["answer"]) {
-    correct();
-    question[currentQuestion]["isCorrect"] = true;
+function handleAnswer(selected) {
+  const q = questions[currentQuestion];
+  q.selectedAnswer = selected;
+
+  const isCorrect = selected === q.answer + 1;
+  q.isCorrect = isCorrect;
+
+  if (isCorrect) {
+    currentPoints++;
+    $(".sum").html("Correct!");
   } else {
-    wrong();
-    question[currentQuestion]["isCorrect"] = false;
+    const correctText = q.options[q.answer];
+    $(".sum").html(`Wrong! Answer is ${correctText}`);
   }
-}
 
-function wrong() {
-  $(".options-grid").hide();
-  $(".question").hide();
-  $(".sum").show();
-  $(".sum").html(
-    "Wrong ! Answer is " +
-      question[currentQuestion]["options"][
-        question[currentQuestion]["answer"] - 1
-      ]
-  );
-  $(".next").show();
-}
-
-function correct() {
-  $(".options-grid").hide();
-  $(".question").hide();
-  $(".sum").show();
-  $(".sum").html("Correct !");
-  currentPoints++;
-  $(".next").show();
+  $(".options-grid, .question").hide();
+  $(".sum, .next").show();
 }
 
 function nextQuestion() {
-  if (question[currentQuestion]["numQues"] != totalQues) {
-    currentQuestion++;
-    refresh();
+  currentQuestion++;
+
+  if (currentQuestion < totalQues) {
+    loadQuestion();
   } else {
-    finished();
+    showSummary();
   }
 }
 
-function finished() {
-  $(".quiz-container").hide();
-  $("#points").hide();
-  $("#numQues").hide();
-  $(".next").hide();
-  $(".summary").html("You get " + currentPoints + " points for this Quiz");
-  history();
+function showSummary() {
+  $(".quiz-container, #points, #numQues, .next").hide();
+  $(".summary").html(`You scored ${currentPoints} out of ${totalQues}`);
+  renderHistory();
 }
 
-function history() {
-  $(".history").html("HISTORY");
-  $(".his").css("border", "2px solid white");
+function renderHistory() {
+  $(".history").show();
+  const historyContainer = $(".history");
+  historyContainer.empty(); 
 
-  for (let i = 0; i < question.length; i++) {
-    let qText = `<p><strong>Q${question[i].numQues}:</strong> ${question[i].question}</p>`;
-    let userAnswer =
-      question[i].options[question[i].selectedAnswer - 1] || "Not answered";
-    let correctAnswer = question[i].options[question[i].answer - 1];
+  const header = $("<h2>").text("Quiz History");
+  historyContainer.append(header);
 
-    let answerInfo = `<p>Your answer: ${userAnswer}<br>Correct answer: ${correctAnswer}</p>`;
+  questions.forEach((q) => {
+    const userAnswerIndex = q.selectedAnswer ? q.selectedAnswer - 1 : -1;
+    const correctAnswerIndex = q.answer;
 
-    $(".his").append(`<div>${qText}${answerInfo}</div><hr>`);
-  }
+    const itemDiv = $("<div>")
+      .addClass("history-item")
+      .addClass(q.isCorrect ? "correct" : "incorrect");
+
+    const questionElem = $("<p>")
+      .addClass("history-question")
+      .html(`<strong>Q${q.numQues}:</strong> ${q.question}`);
+
+    itemDiv.append(questionElem);
+
+    // List all options with highlights
+    q.options.forEach((optionText, index) => {
+      const optionElem = $("<p>").addClass("history-option").text(optionText);
+
+      // Highlight correct answer
+      if (index === correctAnswerIndex) {
+        optionElem.css({
+          "font-weight": "bold",
+          "color": "#00d675",
+          "text-decoration": "underline",
+        });
+      }
+
+      // Highlight user selected answer differently if incorrect
+      if (index === userAnswerIndex && index !== correctAnswerIndex) {
+        optionElem.css({
+          "color": "#ff4c4c",
+          "font-weight": "bold",
+        });
+      }
+
+      // If user selected the correct answer, it is already styled, so no extra needed
+
+      itemDiv.append(optionElem);
+    });
+
+    historyContainer.append(itemDiv);
+  });
 }
-
-
-
