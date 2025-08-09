@@ -35,7 +35,7 @@ function loadQuestion() {
   $(".options-grid, .question").show();
 
   // Update header info
-  $("#points").html(`Points: ${currentPoints}`);
+  $("#points").html(`Your Points: ${currentPoints}`);
   $("#numQues").html(`Current Question: ${currentQuestion + 1} / ${totalQues}`);
 
   const q = questions[currentQuestion];
@@ -84,7 +84,7 @@ function showSummary() {
 function renderHistory() {
   $(".history").show();
   const historyContainer = $(".history");
-  historyContainer.empty(); 
+  historyContainer.empty();
 
   const header = $("<h2>").text("Quiz History");
   historyContainer.append(header);
@@ -111,7 +111,7 @@ function renderHistory() {
       if (index === correctAnswerIndex) {
         optionElem.css({
           "font-weight": "bold",
-          "color": "#00d675",
+          color: "#00d675",
           "text-decoration": "underline",
         });
       }
@@ -119,7 +119,7 @@ function renderHistory() {
       // Highlight user selected answer differently if incorrect
       if (index === userAnswerIndex && index !== correctAnswerIndex) {
         optionElem.css({
-          "color": "#ff4c4c",
+          color: "#ff4c4c",
           "font-weight": "bold",
         });
       }
