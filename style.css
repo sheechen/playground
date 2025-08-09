@@ -199,3 +199,27 @@ button.option:hover {
     font-size: 24px;
   }
 }
+
+#admin {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #ff4757;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#admin:hover {
+  background-color: #a43e4d;
+}
+
+#admin:active {
+  background-color: #ed8792;
+  transform: scale(0.95);
+}
