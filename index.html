@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Quiz Game</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js" type="module"></script>
   </head>
   <body>
     <div>
-      <button id="admin" onclick="admin()">ADMIN</button>
+      <button id="admin" onclick="admin()">admin</button>
     </div>
     <div>
       <div id="points"></div>
@@ -19,6 +19,7 @@
     <div class="quiz-container">
       <div class="sum"></div>
       <div class="question"></div>
+      <div class="UI"></div>
       <div class="options-grid">
         <div>
           <button class="option" data-option="1" onclick="answer(1)">1</button>

@@ -17,6 +17,9 @@ for (let i = 0; i < totalQues; i++) {
 
 $(document).ready(() => {
   loadQuestion();
+  $("#admin").click(() => {
+    admin();
+  });
 
   // Handle option click
   $(".option").click(function () {
@@ -73,6 +76,29 @@ function nextQuestion() {
   } else {
     showSummary();
   }
+}
+
+//admin mode
+
+$("#admin").html("Admin Mode");
+
+function admin() {
+  $(".quiz-container, .next, .points, .numQues").hide();
+  $("#button").html("Quit Admin Mode");
+  $(".sum").html("Admin Mode: Edit Questions");
+  $(".UI").html(`
+    <button class="add-question" onclick="addQuestion()">Add Question</button>
+    <button class="edit-question" onclick="editQuestion()">Edit Question</button>
+    <button class="delete-question" onclick="deleteQuestion()">Delete Question</button>
+    <button class="quit-admin" onclick="quitAdmin()">Quit Admin Mode</button>
+  `);
+  $(".UI").show();
+  $(".history").hide();
+}
+
+function quitAdmin() {
+  $(".quiz-container, .next").show();
+  $("#button").html("Admin Mode");
 }
 
 function showSummary() {
