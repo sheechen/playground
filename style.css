@@ -200,7 +200,9 @@ button.option:hover {
   }
 }
 
-#admin {
+#admin,
+#quitAdmin,
+#back {
   position: fixed;
   top: 20px;
   right: 20px;
@@ -215,11 +217,59 @@ button.option:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-#admin:hover {
+#admin:hover,
+#quitAdmin:hover #back:hover {
   background-color: #a43e4d;
 }
 
-#admin:active {
+#admin:active,
+#quitAdmin:active,
+#back:active {
   background-color: #ed8792;
   transform: scale(0.95);
+}
+
+#addQuestion,
+#viewQuestions {
+  background: linear-gradient(to right, #4b6cb7, #182848);
+  color: white;
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: normal;
+  word-break: break-word;
+  transition: all 0.3s ease;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+#addQuestion:hover,
+#viewQuestions:hover {
+  background: linear-gradient(to right, #5b0c58, #b31271);
+  transform: translateY(-2px);
+}
+
+#adminID,
+#addQues {
+  font-size: 50px;
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+}
+
+#points,
+#numQues {
+  text-shadow: 5px 5px 5px black;
+}
+
+#adminOptions {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 20px;
+  margin-top: 30px;
 }
