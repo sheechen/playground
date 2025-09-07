@@ -15,7 +15,7 @@ export const UI = [
     answer: 1,
   },
   {
-    question: "What is the result of `2 + \"2\"` in JavaScript?",
+    question: 'What is the result of `2 + "2"` in JavaScript?',
     options: ["4", '"22"', "NaN", "undefined"],
     answer: 1,
   },
