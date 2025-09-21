@@ -168,31 +168,3 @@ function renderHistory() {
     historyContainer.append(itemDiv);
   });
 }
-
-//add question
-function addQues() {
-  const question = String($("#question").val());
-  const option1 = String($("#option1").val());
-  const option2 = String($("#option2").val());
-  const option3 = String($("#option3").val());
-  const option4 = String($("#option4").val());
-  const answer = Number($("#answer").val()) - 1;
-
-  const newQuestion = {
-    question: question,
-    options: [option1, option2, option3, option4],
-    answer: answer,
-  };
-
-  questions.push(newQuestion);
-  alert("Question added successfully!");
-  // Clear form
-  $("#question").val("");
-  $("#option1").val("");
-  $("#option2").val("");
-  $("#option3").val("");
-  $("#option4").val("");
-  $("#answer").val("");
-}
-
-//view qustion;

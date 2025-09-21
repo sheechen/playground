@@ -7,33 +7,34 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js" type="module"></script>
+    <script src="add_question_script.js" type="module"></script>
   </head>
   <body>
     <div>
       <button id="back">Back</button>
     </div>
     <div>
-      <h2 id="addQues">Add New Question</h2>
+      <h1 id="addQues">Add New Question</h2>
       <form id="questionForm">
         <div>
           <label for="questionText">Question:</label>
-          <input type="text" id="questionText" name="questionText" required />
+          <input type="text" id="questionText" name="questionText" class="a" required />
         </div>
         <div>
           <label for="option1">Option 1:</label>
-          <input type="text" id="option1" name="option1" required />
+          <input type="text" id="option1" name="option1" class="a" required />
         </div>
         <div>
           <label for="option2">Option 2:</label>
-          <input type="text" id="option2" name="option2" required />
+          <input type="text" id="option2" name="option2" class="a" required />
         </div>
         <div>
           <label for="option3">Option 3:</label>
-          <input type="text" id="option3" name="option3" required />
+          <input type="text" id="option3" name="option3" class="a" required />
         </div>
         <div>
           <label for="option4">Option 4:</label>
-          <input type="text" id="option4" name="option4" required />
+          <input type="text" id="option4" name="option4" class="a" required />
         </div>
         <div>
           <label for="correctOption">Correct Option (1-4):</label>
@@ -46,9 +47,8 @@
             required
           />
         </div>
-        <button id="submit" type="submit">Add Question</button>
+        <button id="add" onclick="addQues()">Add</button>
       </form>
-      <div id="message"></div>
     </div>
   </body>
 </html>
