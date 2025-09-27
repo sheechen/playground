@@ -1,4 +1,4 @@
-export const UI = [
+export let UI = [
   {
     question: "Which is the correct way to declare a variable in JavaScript?",
     options: ["var = myVar;", "variable myVar;", "var myVar;", "v myVar =;"],
@@ -130,3 +130,32 @@ export const UI = [
     answer: 0,
   },
 ];
+
+document.addEventListener("DOMContentLoaded", () => {
+  const startQuizBtn = document.getElementById("startQuiz");
+  startQuizBtn.addEventListener("click", startQuiz);
+
+  function startQuiz() {
+    const questions = JSON.parse(localStorage.getItem("questions")) || [];
+    if (questions.length === 0) {
+      alert("No questions available! Please add some first.");
+      return;
+    }
+
+    let score = 0;
+
+    questions.forEach((q, index) => {
+      const userAnswer = prompt(
+        `Q${index + 1}: ${q.question}\nOptions: ${q.options.join(", ")}`
+      );
+      if (
+        userAnswer &&
+        userAnswer.trim().toLowerCase() === q.answer.toLowerCase()
+      ) {
+        score++;
+      }
+    });
+
+    alert(`Quiz finished! You scored ${score} out of ${questions.length}.`);
+  }
+});
